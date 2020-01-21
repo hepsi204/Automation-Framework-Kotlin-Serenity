@@ -1,0 +1,23 @@
+# OSX files
+.DS_Store
+
+# Gradle:
+.gradle/
+build/
+cache/
+
+# User-specific stuff:
+.idea/
+local.properties
+gradle_abj
+resources/*
+*.swp
+.classpath
+.project
+.settings
+
+# user settings file
+*.DotSettings.user
+
+# node modules folder
+node_modules/*
