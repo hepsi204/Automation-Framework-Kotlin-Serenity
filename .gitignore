@@ -15,6 +15,7 @@ resources/*
 .classpath
 .project
 .settings
+target/
 
 # user settings file
 *.DotSettings.user

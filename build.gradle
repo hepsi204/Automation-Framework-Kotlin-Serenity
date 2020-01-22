@@ -30,6 +30,7 @@ dependencies {
     implementation 'net.serenity-bdd:serenity-cucumber:1.9.45'
     implementation 'net.serenity-bdd:serenity-rest-assured:2.0.70'
     implementation "org.assertj:assertj-core:3.8.0"
+    implementation 'io.github.bonigarcia:webdrivermanager:3.6.2'
 }
 
 compileKotlin {
@@ -38,3 +39,16 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+test {
+    testLogging.showStandardStreams = true
+    /* Assign all env variables passed to gradle as system properties.
+    Serenity only picks up on properties (not env variables) */
+    systemProperties System.getProperties()
+    afterTest { desc, result ->
+        if ("FAILURE" == result.resultType as String) {
+            failures.withWriterAppend {
+                it.write("${desc.className}.${desc.name}\n")
+            }
+        }
+    }}
