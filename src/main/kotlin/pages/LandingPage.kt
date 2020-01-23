@@ -1,13 +1,25 @@
 package pages
 
-import config.Config
-import net.thucydides.core.annotations.DefaultUrl
-import net.thucydides.core.annotations.Managed
-import pages.BasePageObject
+import net.serenitybdd.core.pages.WebElementFacade
+import net.thucydides.core.annotations.At
+import net.thucydides.core.annotations.WhenPageOpens
 
-@DefaultUrl("http://the-internet.herokuapp.com")
+@At("http://the-internet.herokuapp.com")
 class LandingPage : BasePageObject() {
-    override val urlForThisPage = Config.instance.url
 
+    private val heading = BasePageElement(locatorType=Locators.CLASS,
+                                          desktopLocator = "heading",
+                                          page = this )
+
+    @WhenPageOpens
+    override fun isPageLoaded() : Boolean
+    {
+        val heading = findByLocator(heading.locatorType,heading.desktopLocator)
+        return heading.isDisplayed
+    }
+
+    fun getLinksUsingLinkText(linktextLocator : String) : WebElementFacade
+    {
+        return findByLocator(Locators.LINKTEXT, linktextLocator)
+    }
 }
-

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver
 
 @RunWith(CucumberWithSerenity::class)
 @CucumberOptions(features = ["src/test/kotlin/features/landingPage"], glue = ["features"])
-class GetUrlTestRunner {
+class LandingPageTestRunner {
 
     @Managed
     lateinit var driver: WebDriver
