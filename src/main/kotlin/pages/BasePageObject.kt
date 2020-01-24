@@ -28,12 +28,29 @@ abstract class BasePageObject : PageObject() {
                 Locators.LINKTEXT -> find(By.linkText(locator))
                 Locators.NAME -> find(By.name(locator))
                 Locators.TAGNAME -> find(By.tagName(locator))
-//                else -> throw Exception("No implementation found for the locator type passed - $locatorType")
             }
         } catch (e: NoSuchElementException) {
             throw NoSuchElementException("No element found on page with locator $locator :\n${driver.pageSource}", e)
         }
         return elementRequested
+    }
+
+    fun findAllByLocator(locatorType : Locators, locator: String): List<WebElementFacade> {
+        val elementsRequested: List<WebElementFacade>
+        try {
+            elementsRequested = when(locatorType) {
+                Locators.XPATH -> findAll(By.xpath(locator))
+                Locators.ID -> findAll(By.id(locator))
+                Locators.CSS -> findAll(By.cssSelector(locator))
+                Locators.CLASS -> findAll(By.className(locator))
+                Locators.LINKTEXT -> findAll(By.linkText(locator))
+                Locators.NAME -> findAll(By.name(locator))
+                Locators.TAGNAME -> findAll(By.tagName(locator))
+            }
+        } catch (e: NoSuchElementException) {
+            throw NoSuchElementException("No element found on page with locator $locator :\n${driver.pageSource}", e)
+        }
+        return elementsRequested
     }
 }
 

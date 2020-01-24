@@ -2,7 +2,7 @@ package pages
 
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
-import net.thucydides.core.annotations.WhenPageOpens
+import org.junit.Assert
 
 @At("http://the-internet.herokuapp.com")
 class LandingPage : BasePageObject() {
@@ -11,11 +11,10 @@ class LandingPage : BasePageObject() {
                                           desktopLocator = "heading",
                                           page = this )
 
-    @WhenPageOpens
     override fun isPageLoaded() : Boolean
     {
-        val heading = findByLocator(heading.locatorType,heading.desktopLocator)
-        return heading.isDisplayed
+        Assert.assertTrue("Incorrect header on Checkboxes page",heading.element.text == "Welcome to the-internet")
+        return heading.element.isDisplayed
     }
 
     fun getLinksUsingLinkText(linktextLocator : String) : WebElementFacade
