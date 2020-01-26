@@ -5,7 +5,15 @@ Feature: Test the-internet
   Given I am a user who has retrieved the-internet website
   When I click on the Checkboxes link on the landing page
   Then I see the checkboxes page
-  And I see checkbox 1 not selected on the page
-  And I see checkbox 2 is selected on the page
+  And checkbox 1 is shown as not selected
+  And checkbox 2 is shown as selected
 
+  Scenario: On checkboxes page, user wants to select checkbox 1
+  Given I am on the checkboxes page
+  When I click on checkbox 1
+  Then checkbox 1 is shown as selected
 
+  Scenario: On checkboxes page, user wants to un-select checkbox 2
+  Given I am on the checkboxes page
+  When I click on checkbox 2
+  Then checkbox 2 is shown as not selected

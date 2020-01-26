@@ -1,6 +1,5 @@
 package pages
 
-import config.PageName
 import config.PageUrlFactory
 import net.serenitybdd.core.pages.PageObject
 import net.serenitybdd.core.pages.WebElementFacade
@@ -11,7 +10,7 @@ abstract class BasePageObject : PageObject() {
 
     private val pageUrlFactory by lazy { PageUrlFactory() }
 
-    fun getPage(pageName : PageName) {
+    fun getPage(pageName : String) {
         return driver.get(pageUrlFactory.getPageUrl(pageName))
     }
 

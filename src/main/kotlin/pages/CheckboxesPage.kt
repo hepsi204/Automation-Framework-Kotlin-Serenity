@@ -13,11 +13,27 @@ class CheckboxesPage : BasePageObject() {
                                             page = this )
 
     val checkboxOne = BasePageElement(locatorType=Locators.XPATH,
-                                          desktopLocator = "//*[@id=\"checkboxes\"]/input[1]",
-                                          page = this )
+                                      desktopLocator = "//*[@id=\"checkboxes\"]/input[1]",
+                                      page = this )
     val checkboxTwo = BasePageElement(locatorType=Locators.XPATH,
-                                                desktopLocator = "//*[@id=\"checkboxes\"]/input[2]",
-                                                page = this )
+                                      desktopLocator = "//*[@id=\"checkboxes\"]/input[2]",
+                                      page = this )
+
+    fun clickOnCheckbox(checkboxId : String){
+       when(checkboxId){
+            "1" -> checkboxOne.element.click()
+            "2" -> checkboxTwo.element.click()
+            else -> throw  Exception("No implementation found for checkbox $checkboxId")
+        }
+    }
+
+    fun isSelected(checkboxId : String) : Boolean {
+        return when(checkboxId){
+            "1" -> checkboxOne.element.isSelected
+            "2" -> checkboxTwo.element.isSelected
+            else -> throw  Exception("No implementation found for checkbox $checkboxId")
+        }
+    }
 
     override fun isPageLoaded() : Boolean
     {
