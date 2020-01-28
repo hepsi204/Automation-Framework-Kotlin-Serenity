@@ -9,7 +9,7 @@ class PageUrlFactory {
         CHECKBOXES("/checkboxes")
     }
 
-    private val map: HashMap<String, String> =
+    private val pathMap: HashMap<String, String> =
         hashMapOf(
             "main" to PageName.LANDING_PAGE.path,
             "add remove elements" to PageName.ADD_REMOVE_ELEMENTS.path,
@@ -18,7 +18,7 @@ class PageUrlFactory {
         )
 
     fun getPageUrl(pageName: String): String {
-        val path = map[pageName.toLowerCase()]
+        val path = pathMap[pageName.toLowerCase()]
         return "${Config.instance.url}$path"
     }
 }

@@ -12,10 +12,10 @@ class CheckboxesPage : BasePageObject() {
                                             desktopLocator = "//*[@id=\"content\"]/div/h3",
                                             page = this )
 
-    val checkboxOne = BasePageElement(locatorType=Locators.XPATH,
+    private val checkboxOne = BasePageElement(locatorType=Locators.XPATH,
                                       desktopLocator = "//*[@id=\"checkboxes\"]/input[1]",
                                       page = this )
-    val checkboxTwo = BasePageElement(locatorType=Locators.XPATH,
+    private val checkboxTwo = BasePageElement(locatorType=Locators.XPATH,
                                       desktopLocator = "//*[@id=\"checkboxes\"]/input[2]",
                                       page = this )
 
