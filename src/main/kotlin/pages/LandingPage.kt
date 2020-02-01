@@ -1,24 +1,34 @@
 package pages
 
+import elements.BasePageElement
+import net.serenitybdd.core.annotations.findby.By
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
-import org.junit.Assert
 
-@At("http://the-internet.herokuapp.com")
+@At("https://www.seleniumeasy.com/test/")
 class LandingPage : BasePageObject() {
 
-    private val heading = BasePageElement(locatorType=Locators.CLASS,
-                                          desktopLocator = "heading",
-                                          page = this )
+    private val boardElements = BasePageElement(locatorType = Locators.CLASS,
+                                              desktopLocator = "board",
+                                              page = this)
 
-    override fun isPageLoaded() : Boolean
-    {
-        Assert.assertTrue("Incorrect header on Checkboxes page",heading.element.text == "Welcome to the-internet")
-        return heading.element.isDisplayed
-    }
+    private val roundTabs = BasePageElement(locatorType = Locators.CLASS,
+                                              desktopLocator = "round-tabs",
+                                              page = this)
 
-    fun getLinksUsingLinkText(linktextLocator : String) : WebElementFacade
-    {
-        return findByLocator(Locators.LINKTEXT, linktextLocator)
+
+    fun interactiveBoardButtons(id : String) : WebElementFacade? {
+        val elementMap = mutableMapOf<String,WebElementFacade>()
+        val elementId = when (id){
+                "main" -> "${roundTabs.desktopLocator} one"
+                else -> throw Exception("not implemented")
+        }
+
+        roundTabs.elements.forEach{
+            element ->
+            elementMap[element.getAttribute("class")] = element
+        }
+
+        return elementMap[elementId]
     }
 }

@@ -1,8 +1,10 @@
-package pages
+package elements
 
 import net.serenitybdd.core.pages.WebElementFacade
+import pages.BasePageObject
+import pages.Locators
 
-class BasePageElement(
+open class BasePageElement(
     var locatorType : Locators,
     var desktopLocator :  String,
     val page: BasePageObject

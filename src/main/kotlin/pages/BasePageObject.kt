@@ -6,15 +6,13 @@ import net.serenitybdd.core.pages.WebElementFacade
 import org.openqa.selenium.By
 import org.openqa.selenium.NoSuchElementException
 
-abstract class BasePageObject : PageObject() {
+open class BasePageObject : PageObject() {
 
     private val pageUrlFactory by lazy { PageUrlFactory() }
 
     fun getPage(pageName : String) {
         return driver.get(pageUrlFactory.getPageUrl(pageName))
     }
-
-    abstract fun isPageLoaded() : Boolean
 
     fun findByLocator(locatorType : Locators, locator: String): WebElementFacade {
         val elementRequested: WebElementFacade
