@@ -4,9 +4,9 @@ Feature: Test Main page
 
   Scenario: User wants to retrieve selenium test website
   Given I am a user who has retrieved the selenium test website
-  And I can see the welcome icon on the interactive board
-#  When I click on the Checkboxes link on the landing page
-#  Then I see the checkboxes page
+  And I can see the welcome toggle tab on the interactive board
+  When I click on the Start Practising button
+  Then I can see the Basic toggle tab section displayed
 #  And checkbox 1 is shown as not selected
 #  And checkbox 2 is shown as selected
 #

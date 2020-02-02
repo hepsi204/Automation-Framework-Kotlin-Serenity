@@ -3,12 +3,13 @@ package features
 import cucumber.api.java.en.And
 import pages.LandingPage
 import cucumber.api.java.en.Given
+import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
+import org.junit.Assert.assertTrue
 
 class BaseStepDefinitions {
 
     private lateinit var landingPage: LandingPage
-
 
     @Given("^I am a user who has retrieved the selenium test website$")
     fun iAmUserWhoHasRetrievedTheSeleniumTestWebsite(){
@@ -16,13 +17,18 @@ class BaseStepDefinitions {
 //        assertTrue("Landing page did not load",landingPage.isPageLoaded())
     }
 
-    @And("I can see the (.*) icon on the interactive board")
-    fun iAmOnPage(iconName : String){
-        landingPage.interactiveBoardButtons("main")!!.isVisible
+    @When("^I click on the Start Practising button$")
+    fun iClickOnTheStartPractisingButton(){
+        landingPage.startPractisingButton.element.click()
     }
 
-//    @When("^I click on the (.*) link on the landing page$")
-//    fun iClickOnTheLink(elementToActOn : String){
-//        landingPage.getLinksUsingLinkText(elementToActOn).click()
-//    }
+    @Then("^I can see the Basic toggle tab section displayed$")
+    fun iCanSeeTheToggleTabSectionDisplayed(){
+        assertTrue( landingPage.checkToggleTabSectionDisplayed())
+    }
+
+    @And("I can see the (.*) toggle tab on the interactive board")
+    fun iCanSeeTheToggleTabOnTheInteractiveBoard(toggleTabId : String){
+        landingPage.getToggleTabElement(toggleTabId)!!.isVisible
+    }
 }
