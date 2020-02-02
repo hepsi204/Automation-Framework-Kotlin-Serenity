@@ -12,7 +12,7 @@ Feature: Test Main page
     Given I am a user who has retrieved the selenium test website
     And I have opened the Basic tab section
     When I click on Simple Form Demo link within basic tab section
-    Then I see the Simple Form Demo page
+    Then I see the Simple Form Demo page loaded
 
 
 #  Scenario:

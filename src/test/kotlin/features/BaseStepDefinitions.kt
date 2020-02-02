@@ -25,8 +25,8 @@ class BaseStepDefinitions {
     }
 
     @When("^I click on (.*) link within basic tab section$")
-    fun iClickOnLinkWithinBasicTabSection( linktextLocator : String ){
-        landingPage.getLinksWithinBasicTab(linktextLocator).click()
+    fun iClickOnLinkWithinBasicTabSection( linkTextString : String ){
+        landingPage.getLinkWithinBasicTab(linkTextString).click()
     }
 
     @And("^I have opened the (.*) tab section$")
@@ -36,20 +36,19 @@ class BaseStepDefinitions {
         }
     }
 
-    @Then("^I can see the Basic toggle tab section displayed$")
-    fun iCanSeeTheToggleTabSectionDisplayed(){
-        assertTrue( "Basic toggle tab section is not displayed", landingPage.checkToggleTabSectionDisplayed())
+    @Then("^I can see the (.*) toggle tab section displayed$")
+    fun iCanSeeTheToggleTabSectionDisplayed( sectionId: String ){
+        assertTrue( "Basic toggle tab section is not displayed", landingPage.checkToggleTabSectionDisplayed(sectionId))
     }
 
-    @Then("^I see the (.*) page$")
-    fun iSeeThePage( pageId : String ){
-      val pageLoaded =   when(pageId.toLowerCase()) {
+    @Then("^I see the (.*) page loaded$")
+    fun iSeeThePageLoaded ( pageId : String ){
+      val pageLoaded =   when (pageId.toLowerCase()) {
           "landing page", "main" -> landingPage.isPageLoaded()
           "simple form demo" -> simpleFormDemoPage.isPageLoaded()
           else -> throw Exception("Page loaded check not implemented for $pageId page")
         }
-
-        assertTrue( "$pageId page is not loaded", pageLoaded )
+      assertTrue( "$pageId page is not loaded", pageLoaded )
     }
 
     @And("I can see the (.*) toggle tab on the interactive board")
