@@ -1,9 +1,9 @@
 package pages
 
 import elements.BasePageElement
-import net.serenitybdd.core.annotations.findby.By
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
+import org.junit.Assert.assertTrue
 
 @At("https://www.seleniumeasy.com/test/")
 class LandingPage : BasePageObject() {
@@ -19,6 +19,10 @@ class LandingPage : BasePageObject() {
     private val toggleTabSection = BasePageElement(locatorType = Locators.ID,
                                                    desktopLocator = "basic",
                                                    page = this)
+
+    fun getLinksWithinBasicTab (id : String ) : WebElementFacade {
+        return findByLocator(Locators.LINKTEXT,BasicTabLinks.SIMPLE_FORM.linkTextLocator)
+    }
 
     fun getToggleTabElement (id : String) : WebElementFacade? {
         val toggleTabElementMap = mapToggleTabElements()
@@ -52,4 +56,19 @@ class LandingPage : BasePageObject() {
         }
         return toggleTabElementMap
     }
+
+    override fun isPageLoaded() : Boolean {
+        return startPractisingButton.element.isVisible
+    }
+}
+
+enum class BasicTabLinks( val path : String, val linkTextLocator : String) {
+    SIMPLE_FORM("basic-first-form-demo.html","Simple Form Demo"),
+    CHECK_BOX("basic-checkbox-demo.html", "Check Box Demo"),
+    RADIO_BUTTONS("basic-radiobutton-demo.html", "Radio Buttons Demo"),
+    DROPDOWN_LIST("basic-select-dropdown-demo.html", "Select Dropdown List"),
+    JAVASCRIPT_ALERTS("javascript-alert-box-demo.html", "Javascript Alerts"),
+    POP_UPS("window-popup-modal-demo.html", "Window Pop Up Modal"),
+    BOOTSTRAP_ALERTS("bootstrap-alert-messages-demo.html", "Bootstrap Alerts"),
+    BOOTSTRAP_MODAL("bootstrap-modal-demo.html", "Bootstrap Modal")
 }
