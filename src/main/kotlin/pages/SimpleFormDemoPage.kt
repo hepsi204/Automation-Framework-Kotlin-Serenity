@@ -13,6 +13,18 @@ class SimpleFormDemoPage : BasePageObject() {
         page = this
     )
 
+    private val showMessageButton = BasePageElement(
+        locatorType = Locators.LINKTEXT,
+        desktopLocator = "Show Message",
+        page = this
+    )
+
+    private val getTotalButton = BasePageElement(
+        locatorType = Locators.LINKTEXT,
+        desktopLocator = "Get Total",
+        page = this
+    )
+
     private val twoInputFieldOne = BasePageElement(
         locatorType = Locators.ID,
         desktopLocator = "sum1",
@@ -24,6 +36,14 @@ class SimpleFormDemoPage : BasePageObject() {
         desktopLocator = "sum2",
         page = this
     )
+
+    fun clickOnButton ( buttonText : String) {
+       return  when (buttonText.toLowerCase()) {
+            "show message" -> showMessageButton.element.click()
+            "get total" -> getTotalButton.element.click()
+            else -> throw Exception("Button with text $buttonText not implemented for this page")
+        }
+    }
 
     fun typeIntoSingleInputField( message : String ) : WebElementFacade {
         return singleInputField.element.type(message)

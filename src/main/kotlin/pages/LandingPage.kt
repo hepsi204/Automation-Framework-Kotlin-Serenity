@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.At
 @At("https://www.seleniumeasy.com/test/")
 class LandingPage : BasePageObject() {
 
-    val startPractisingButton = BasePageElement(locatorType = Locators.ID,
+    private val startPractisingButton = BasePageElement(locatorType = Locators.ID,
                                               desktopLocator = "btn_basic_example",
                                               page = this)
 
@@ -21,6 +21,13 @@ class LandingPage : BasePageObject() {
 
     fun getLinkWithinBasicTab (linkTextString : String ) : WebElementFacade {
         return findByLocator(Locators.LINKTEXT,linkTextString)
+    }
+
+    fun clickOnButton ( buttonText : String ) {
+        return when (buttonText.toLowerCase()) {
+            "start practising" -> startPractisingButton.element.click()
+            else -> throw Exception("Button with text $buttonText not implemented for this page")
+        }
     }
 
     fun getToggleTabElement (id : String) : WebElementFacade? {

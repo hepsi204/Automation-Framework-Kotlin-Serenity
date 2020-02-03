@@ -1,7 +1,5 @@
 package config
 
-import cucumber.api.java.jv.Lan
-
 class PageUrlFactory {
 
     enum class PageName (val path: String) {

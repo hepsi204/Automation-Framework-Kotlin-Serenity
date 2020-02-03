@@ -19,9 +19,26 @@ class BaseStepDefinitions {
         assertTrue("Landing page is not loaded",landingPage.isPageLoaded())
     }
 
-    @When("^I click on the Start Practising button$")
-    fun iClickOnTheStartPractisingButton(){
-        landingPage.startPractisingButton.element.click()
+    @Given("^I have retrieved (.*) page$")
+    fun iAmOnPage( pageId : String ){
+        landingPage.getPage(pageId)
+    }
+
+    @When("^I click on the (.*) button on the (.*) page$")
+    fun iClickOnTheButton( buttonText : String , pageName : String ){
+        when (pageName.toLowerCase()){
+            "landing", "main" -> landingPage.clickOnButton(buttonText)
+            "simple form demo" -> simpleFormDemoPage.clickOnButton(buttonText)
+        }
+    }
+
+    @When("^I type into the (.*) text box$")
+    fun iTypeIntoTheTextBox( textBoxId : String ){
+        when (textBoxId.toLowerCase()){
+            "enter message" -> simpleFormDemoPage.typeIntoSingleInputField("test")
+            "enter a" -> simpleFormDemoPage.typeIntoTwoInputField("4","1")
+            "enter b" -> simpleFormDemoPage.typeIntoTwoInputField("6","2")
+        }
     }
 
     @When("^I click on (.*) link within basic tab section$")
@@ -32,7 +49,7 @@ class BaseStepDefinitions {
     @And("^I have opened the (.*) tab section$")
     fun iHaveOpenedTheTabSection ( sectionId : String ){
         when (sectionId.toLowerCase()) {
-            "basic" -> iClickOnTheStartPractisingButton()
+            "basic" -> landingPage.clickOnButton("Start practising")
         }
     }
 
