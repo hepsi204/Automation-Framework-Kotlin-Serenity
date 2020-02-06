@@ -16,6 +16,7 @@ resources/*
 .project
 .settings
 target/
+/out
 
 # user settings file
 *.DotSettings.user

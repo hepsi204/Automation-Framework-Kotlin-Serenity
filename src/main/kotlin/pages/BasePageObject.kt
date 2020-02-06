@@ -1,5 +1,6 @@
 package pages
 
+import config.Config
 import config.PageUrlFactory
 import net.serenitybdd.core.pages.PageObject
 import net.serenitybdd.core.pages.WebElementFacade
@@ -50,6 +51,13 @@ abstract class BasePageObject : PageObject() {
             throw NoSuchElementException("No element found on page with locator $locator :\n${driver.pageSource}", e)
         }
         return elementsRequested
+    }
+
+    fun logLocatorAndPageSource(locator: String) {
+        if (Config.instance.showPageSourceForXPathQuery == "true") {
+            println("Element locator: $locator")
+            println("Current Page source:\n${driver.pageSource}")
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 package config
 
-private const val SESSION_EXPIRY_MINUTES: Long = 2
+private const val DELAY_BY_MINUTES: Long = 2
 
 class Config private constructor() {
 
@@ -10,7 +10,7 @@ class Config private constructor() {
     init {
         url = envOrDefault("url", "https://www.seleniumeasy.com/test/")
         showPageSourceForXPathQuery = envOrDefault("XPATH_PAGE_SOURCE", "false")
-        val sessionExpiryMinutes = envOrDefault("SESSION_EXPIRY_MINUTES", SESSION_EXPIRY_MINUTES)
+        val delayByMinutes = envOrDefault("DELAY_BY_MINUTES", DELAY_BY_MINUTES)
     }
 
     private fun envOrDefault(key: String, defaultValue: String): String {
@@ -26,7 +26,6 @@ class Config private constructor() {
 
     companion object {
         val instance: Config by lazy { createConfig() }
-
         private fun createConfig(): Config {
             return Config()
         }

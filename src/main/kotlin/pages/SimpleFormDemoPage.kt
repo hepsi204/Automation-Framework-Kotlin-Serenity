@@ -14,8 +14,8 @@ class SimpleFormDemoPage : BasePageObject() {
     )
 
     private val showMessageButton = BasePageElement(
-        locatorType = Locators.LINKTEXT,
-        desktopLocator = "Show Message",
+        locatorType = Locators.XPATH,
+        desktopLocator = "//.*button[@class='btn btn-default'][.='Show Message’]",
         page = this
     )
 
@@ -46,7 +46,7 @@ class SimpleFormDemoPage : BasePageObject() {
     }
 
     fun typeIntoSingleInputField( message : String ) : WebElementFacade {
-        return singleInputField.element.type(message)
+        return singleInputField.element.typeAndTab(message)
     }
 
     fun typeIntoTwoInputField( message : String,  fieldId : String ) : WebElementFacade {

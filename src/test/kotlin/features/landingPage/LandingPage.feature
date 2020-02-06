@@ -1,5 +1,4 @@
 @landing-page
-@run-now
 Feature: Test Main page
 
   Scenario: User wants to retrieve selenium test website
@@ -14,7 +13,7 @@ Feature: Test Main page
     When I click on Simple Form Demo link within basic tab section
     Then I see the Simple Form Demo page loaded
 
-
+  @run-now
   Scenario: User wants to validate that the message entered in single input field matches text displayed
     Given I have retrieved Simple Form Demo page
     And I see the Simple Form Demo page loaded
