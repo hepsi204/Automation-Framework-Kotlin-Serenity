@@ -19,6 +19,7 @@ Feature: Test Main page
     And I see the Simple Form Demo page loaded
     When I type into the Enter message text box
     And I click on the Show Message button on the Simple Form Demo page
+    Then I can see the text entered displayed next to 'Your Message' label
 
 #  Scenario:
 #    Given

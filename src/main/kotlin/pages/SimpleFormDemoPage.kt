@@ -1,6 +1,8 @@
 package pages
 
 import elements.BasePageElement
+import helpers.SessionHelper
+import helpers.SessionHelperIds
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
 import org.junit.Assert.assertTrue
@@ -16,6 +18,12 @@ class SimpleFormDemoPage : BasePageObject() {
     private val showMessageButton = BasePageElement(
         locatorType = Locators.XPATH,
         desktopLocator = "//button[@class='btn btn-default' and contains(., 'Show Message')]",
+        page = this
+    )
+
+    val displayedText = BasePageElement(
+        locatorType = Locators.ID,
+        desktopLocator = "display",
         page = this
     )
 
@@ -38,7 +46,6 @@ class SimpleFormDemoPage : BasePageObject() {
     )
 
     fun clickOnButton ( buttonText : String) {
-
        return  when (buttonText.toLowerCase()) {
             "show message" -> showMessageButton.element.click()
             "get total" -> getTotalButton.element.click()
@@ -47,6 +54,7 @@ class SimpleFormDemoPage : BasePageObject() {
     }
 
     fun typeIntoSingleInputField( message : String ) : WebElementFacade {
+        SessionHelper().setSessionHelper(SessionHelperIds.SINGLE_INPUT_FIELD_TEXT , message)
         return singleInputField.element.typeAndTab(message)
     }
 

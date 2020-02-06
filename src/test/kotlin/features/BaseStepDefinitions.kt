@@ -5,6 +5,8 @@ import pages.LandingPage
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
+import helpers.SessionHelper
+import helpers.SessionHelperIds
 import org.junit.Assert.assertTrue
 import pages.SimpleFormDemoPage
 
@@ -55,7 +57,8 @@ class BaseStepDefinitions {
 
     @Then("^I can see the (.*) toggle tab section displayed$")
     fun iCanSeeTheToggleTabSectionDisplayed( sectionId: String ){
-        assertTrue( "Basic toggle tab section is not displayed", landingPage.checkToggleTabSectionDisplayed(sectionId))
+        assertTrue( "Basic toggle tab section is not displayed",
+            landingPage.checkToggleTabSectionDisplayed(sectionId))
     }
 
     @Then("^I see the (.*) page loaded$")
@@ -66,6 +69,13 @@ class BaseStepDefinitions {
           else -> throw Exception("Page loaded check not implemented for $pageId page")
         }
       assertTrue( "$pageId page is not loaded", pageLoaded )
+    }
+
+    @Then("^I can see the text entered displayed next to /'Your Message/' label$")
+    fun iCanSeeTheTextEnteredDisplayedNextToYourMessage(){
+       val textToAssert =  SessionHelper().getSessionHelper<String>(SessionHelperIds.SINGLE_INPUT_FIELD_TEXT)
+       assertTrue( "Incorrect text displayed for single input field on simple demo form",
+            simpleFormDemoPage.displayedText.element.textValue!! == textToAssert )
     }
 
     @And("I can see the (.*) toggle tab on the interactive board")
