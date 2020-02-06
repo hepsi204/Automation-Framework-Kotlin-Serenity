@@ -15,13 +15,13 @@ class SimpleFormDemoPage : BasePageObject() {
 
     private val showMessageButton = BasePageElement(
         locatorType = Locators.XPATH,
-        desktopLocator = "//.*button[@class='btn btn-default'][.='Show Message’]",
+        desktopLocator = "//button[@class='btn btn-default' and contains(., 'Show Message')]",
         page = this
     )
 
     private val getTotalButton = BasePageElement(
-        locatorType = Locators.LINKTEXT,
-        desktopLocator = "Get Total",
+        locatorType = Locators.XPATH,
+        desktopLocator = "//button[@class='btn btn-default' and contains(., 'Get Total')]",
         page = this
     )
 
@@ -38,6 +38,7 @@ class SimpleFormDemoPage : BasePageObject() {
     )
 
     fun clickOnButton ( buttonText : String) {
+
        return  when (buttonText.toLowerCase()) {
             "show message" -> showMessageButton.element.click()
             "get total" -> getTotalButton.element.click()

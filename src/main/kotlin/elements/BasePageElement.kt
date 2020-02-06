@@ -9,7 +9,6 @@ open class BasePageElement(
     var desktopLocator :  String,
     val page: BasePageObject
 ) {
-
     val element : WebElementFacade
       get (){
         return page.findByLocator(locatorType,desktopLocator)
@@ -19,5 +18,4 @@ open class BasePageElement(
         get (){
             return page.findAllByLocator(locatorType,desktopLocator)
         }
-
 }
