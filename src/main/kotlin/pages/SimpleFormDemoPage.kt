@@ -78,6 +78,7 @@ class SimpleFormDemoPage : BasePageObject() {
 
     override fun isPageLoaded() : Boolean {
         return singleInputField.element.isVisible
+                && twoInputFieldOne.element.isVisible && twoInputFieldTwo.element.isVisible
     }
 
 }

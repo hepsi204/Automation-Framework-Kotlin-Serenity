@@ -8,7 +8,7 @@ class SessionHelper {
     }
 
     fun <T>getSessionHelper( helperId : SessionHelperIds) : T {
-       return Serenity.sessionVariableCalled<T>(helperId)
+       return Serenity.sessionVariableCalled(helperId)
     }
 }
 

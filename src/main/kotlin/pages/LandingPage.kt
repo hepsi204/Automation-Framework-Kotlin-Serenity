@@ -1,6 +1,7 @@
 package pages
 
 import elements.BasePageElement
+import elements.mapElementsToLocators
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
 
@@ -31,7 +32,8 @@ class LandingPage : BasePageObject() {
     }
 
     fun getToggleTabElement (id : String) : WebElementFacade? {
-        val toggleTabElementMap = mapToggleTabElements()
+        val toggleTabElementMap =
+            interactiveRoundToggleTabs.mapElementsToLocators("class")
         val toggleTabElementId = getToggleTabElementClassName(id)
 
         return toggleTabElementMap[toggleTabElementId]
@@ -53,15 +55,6 @@ class LandingPage : BasePageObject() {
             "completed" -> "${interactiveRoundToggleTabs.desktopLocator} five"
             else -> throw Exception("Toggle element $id not implemented")
         }
-    }
-
-    private fun mapToggleTabElements() : MutableMap<String,WebElementFacade>{
-        val toggleTabElementMap = mutableMapOf<String,WebElementFacade>()
-        interactiveRoundToggleTabs.elements.forEach{
-                element ->
-            toggleTabElementMap[element.getAttribute("class")] = element
-        }
-        return toggleTabElementMap
     }
 
     override fun isPageLoaded() : Boolean {

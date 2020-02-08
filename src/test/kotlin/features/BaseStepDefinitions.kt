@@ -8,12 +8,14 @@ import cucumber.api.java.en.When
 import helpers.SessionHelper
 import helpers.SessionHelperIds
 import org.junit.Assert.assertTrue
+import pages.CheckboxesPage
 import pages.SimpleFormDemoPage
 
 class BaseStepDefinitions {
 
     private lateinit var landingPage: LandingPage
     private lateinit var simpleFormDemoPage: SimpleFormDemoPage
+    private lateinit var checkboxesDemoPage: CheckboxesPage
 
     @Given("^I am a user who has retrieved the selenium test website$")
     fun iAmUserWhoHasRetrievedTheSeleniumTestWebsite(){
@@ -21,8 +23,8 @@ class BaseStepDefinitions {
         assertTrue("Landing page is not loaded",landingPage.isPageLoaded())
     }
 
-    @Given("^I have retrieved (.*) page$")
-    fun iAmOnPage( pageId : String ){
+    @Given("^I am on the (.*) page$")
+    fun iAmOnThePage( pageId : String ){
         landingPage.getPage(pageId)
     }
 
@@ -50,6 +52,7 @@ class BaseStepDefinitions {
       val pageLoaded =   when (pageId.toLowerCase()) {
           "landing page", "main" -> landingPage.isPageLoaded()
           "simple form demo" -> simpleFormDemoPage.isPageLoaded()
+          "check box demo" -> checkboxesDemoPage.isPageLoaded()
           else -> throw Exception("Page loaded check not implemented for $pageId page")
         }
       assertTrue( "$pageId page is not loaded", pageLoaded )
