@@ -5,7 +5,6 @@ import helpers.SessionHelper
 import helpers.SessionHelperIds
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
-import org.junit.Assert.assertTrue
 
 @At("https://www.seleniumeasy.com/test/basic-first-form-demo.html")
 class SimpleFormDemoPage : BasePageObject() {
@@ -27,6 +26,12 @@ class SimpleFormDemoPage : BasePageObject() {
         page = this
     )
 
+    val displayedValue = BasePageElement(
+        locatorType = Locators.ID,
+        desktopLocator = "displayvalue",
+        page = this
+    )
+
     private val getTotalButton = BasePageElement(
         locatorType = Locators.XPATH,
         desktopLocator = "//button[@class='btn btn-default' and contains(., 'Get Total')]",
@@ -45,7 +50,7 @@ class SimpleFormDemoPage : BasePageObject() {
         page = this
     )
 
-    fun clickOnButton ( buttonText : String) {
+    fun clickOnButton (buttonText : String) {
        return  when (buttonText.toLowerCase()) {
             "show message" -> showMessageButton.element.click()
             "get total" -> getTotalButton.element.click()
@@ -53,16 +58,21 @@ class SimpleFormDemoPage : BasePageObject() {
         }
     }
 
-    fun typeIntoSingleInputField( message : String ) : WebElementFacade {
+    fun typeIntoSingleInputField(message : String) : WebElementFacade {
         SessionHelper().setSessionHelper(SessionHelperIds.SINGLE_INPUT_FIELD_TEXT , message)
         return singleInputField.element.typeAndTab(message)
     }
 
-    fun typeIntoTwoInputField( message : String,  fieldId : String ) : WebElementFacade {
+    fun typeIntoTwoInputField(message : String, fieldId : TwoInputFieldId) : WebElementFacade {
         return when (fieldId) {
-            "1" ->  twoInputFieldOne.element.type(message)
-            "2" -> twoInputFieldTwo.element.type(message)
-            else -> throw Exception("Only two input fields available")
+            TwoInputFieldId.ONE ->  {
+                SessionHelper().setSessionHelper(SessionHelperIds.TWO_INPUT_FIELD_A_TEXT, message)
+                twoInputFieldOne.element.type(message)
+            }
+            TwoInputFieldId.TWO -> {
+                SessionHelper().setSessionHelper(SessionHelperIds.TWO_INPUT_FIELD_B_TEXT, message)
+                twoInputFieldTwo.element.type(message)
+            }
         }
     }
 
@@ -70,4 +80,9 @@ class SimpleFormDemoPage : BasePageObject() {
         return singleInputField.element.isVisible
     }
 
+}
+
+enum class TwoInputFieldId {
+    ONE,
+    TWO
 }

@@ -14,6 +14,6 @@ class SessionHelper {
 
 enum class SessionHelperIds {
     SINGLE_INPUT_FIELD_TEXT,
-    DOUBLE_INPUT_FIELD_ONE_TEXT,
-    DOUBLE_INPUT_FIELD_TWO_TEXT
+    TWO_INPUT_FIELD_A_TEXT,
+    TWO_INPUT_FIELD_B_TEXT
 }

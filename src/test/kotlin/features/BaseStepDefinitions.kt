@@ -34,29 +34,13 @@ class BaseStepDefinitions {
         }
     }
 
-    @When("^I type into the (.*) text box$")
-    fun iTypeIntoTheTextBox( textBoxId : String ){
-        when (textBoxId.toLowerCase()){
-            "enter message" -> simpleFormDemoPage.typeIntoSingleInputField("test")
-            "enter a" -> simpleFormDemoPage.typeIntoTwoInputField("4","1")
-            "enter b" -> simpleFormDemoPage.typeIntoTwoInputField("6","2")
-        }
-    }
-
     @When("^I click on (.*) link within basic tab section$")
     fun iClickOnLinkWithinBasicTabSection( linkTextString : String ){
         landingPage.getLinkWithinBasicTab(linkTextString).click()
     }
 
-    @And("^I have opened the (.*) tab section$")
-    fun iHaveOpenedTheTabSection ( sectionId : String ){
-        when (sectionId.toLowerCase()) {
-            "basic" -> landingPage.clickOnButton("Start practising")
-        }
-    }
-
-    @Then("^I can see the (.*) toggle tab section displayed$")
-    fun iCanSeeTheToggleTabSectionDisplayed( sectionId: String ){
+    @Then("^I can see the (.*) toggle tab section displayed on the Landing page$")
+    fun iCanSeeTheToggleTabSectionDisplayedOnTheLandingPage( sectionId: String ){
         assertTrue( "Basic toggle tab section is not displayed",
             landingPage.checkToggleTabSectionDisplayed(sectionId))
     }
@@ -71,11 +55,11 @@ class BaseStepDefinitions {
       assertTrue( "$pageId page is not loaded", pageLoaded )
     }
 
-    @Then("^I can see the text entered displayed next to /'Your Message/' label$")
-    fun iCanSeeTheTextEnteredDisplayedNextToYourMessage(){
-       val textToAssert =  SessionHelper().getSessionHelper<String>(SessionHelperIds.SINGLE_INPUT_FIELD_TEXT)
-       assertTrue( "Incorrect text displayed for single input field on simple demo form",
-            simpleFormDemoPage.displayedText.element.textValue!! == textToAssert )
+    @And("^I have opened the (.*) tab section on the Landing page$")
+    fun iHaveOpenedTheTabSectionOnTheLandingPage ( sectionId : String ){
+        when (sectionId.toLowerCase()) {
+            "basic" -> landingPage.clickOnButton("Start practising")
+        }
     }
 
     @And("I can see the (.*) toggle tab on the interactive board")
