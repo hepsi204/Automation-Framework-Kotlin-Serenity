@@ -20,17 +20,18 @@ class Config private constructor() {
     init {
         url = envOrDefault("url", "https://www.seleniumeasy.com/test/")
         showPageSourceForXPathQuery = envOrDefault("XPATH_PAGE_SOURCE", "false")
+
+        //Appium settings
+        appiumServer = envOrDefault("APPIUM_SERVER_URL", "")
         implicitDriverTimeOutDuration = envOrDefault("IMPLICIT_DRIVER_TIMEOUT_DURATION", DURATION_IN_SECONDS)
 
-        appiumServer = envOrDefault("APPIUM_SERVER_URL", "")
-
-        // Appium Android specific driver settings
+        //Appium Android specific driver settings
         androidAppiumAutomationName = envOrDefault("ANDROID_APPIUM_AUTOMATION_NAME", "Appium")
         androidAppiumPlatformName = envOrDefault("ANDROID_APPIUM_PLATFORM_NAME", "ANDROID")
         androidAppiumDeviceName = envOrDefault("ANDROID_APPIUM_DEVICE_NAME", "")
         androidAppiumPlatformVersion = envOrDefault("ANDROID_APPIUM_PLATFORM_VERSION", "")
 
-        // Appium IOS specific driver settings
+        //Appium IOS specific driver settings
         iosAppiumAutomationName = envOrDefault("IOS_APPIUM_AUTOMATION_NAME", "XCUITest")
         iosAppiumPlatformName = envOrDefault("IOS_APPIUM_PLATFORM_NAME", "iOS")
         iosAppiumDeviceName = envOrDefault("IOS_APPIUM_DEVICE_NAME", "")

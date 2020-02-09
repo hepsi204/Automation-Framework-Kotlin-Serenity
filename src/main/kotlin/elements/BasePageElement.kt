@@ -1,5 +1,6 @@
 package elements
 
+import net.serenitybdd.core.annotations.findby.By
 import net.serenitybdd.core.pages.WebElementFacade
 import pages.BasePageObject
 import pages.Locators
@@ -37,11 +38,8 @@ fun BasePageElement.mapElementsToValue() : MutableMap<String, WebElementFacade>{
     return elementMap
 }
 
-fun BasePageElement.mapElementsValueToSelectionState() : MutableMap<String, Boolean>{
-    val elementMap = mutableMapOf<String,Boolean>()
-    this.elements.forEach{
-            element ->
-        elementMap[element.value] = element.isSelected
-    }
+fun BasePageElement.mapElementsTextContentToSelectionState() : ArrayList<Pair<String,Boolean>>{
+    val elementMap = arrayListOf<Pair<String,Boolean>>()
+    this.elements.iterator().forEach { elementMap.add(Pair(it.textContent, it.find<WebElementFacade>(By.tagName("input")).isSelected  )) }
     return elementMap
 }

@@ -2,13 +2,14 @@ package pages
 
 import elements.BasePageElement
 import elements.mapElementsToLocators
-import elements.mapElementsToValue
-import elements.mapElementsValueToSelectionState
+import net.serenitybdd.core.annotations.findby.By
 import net.serenitybdd.core.pages.WebElementFacade
 
 class CheckboxesPage : BasePageObject() {
 
-    private val panelHeadingsLocator = BasePageElement(
+    val expectedNumberOfOptionsCheckboxes = 4
+
+        private val panelHeadingsLocator = BasePageElement(
         locatorType = Locators.CLASS,
         desktopLocator = "panel-heading",
         page = this
@@ -32,14 +33,41 @@ class CheckboxesPage : BasePageObject() {
         page = this
     )
 
-    private val optionCheckboxes = BasePageElement(
+    private val checkboxesList = BasePageElement(
         locatorType = Locators.CLASS,
-        desktopLocator = "cb1-element",
+        desktopLocator = "checkbox",
         page = this
     )
 
-    fun checkIfOptionsCheckboxesAreSelected(){
-        val elementsMap = optionCheckboxes.mapElementsValueToSelectionState()
+    private fun getCheckboxesListWithSelectionState(sectionId : String) : ArrayList<Pair<String,Boolean>> {
+        val elementMap = arrayListOf<Pair<String,Boolean>>()
+        checkboxesList.elements.iterator().forEach {
+            elementMap.add(Pair(it.textContent.trim(), it.find<WebElementFacade>(By.tagName("input")).isSelected))
+        }
+        val optionsCheckboxesList = arrayListOf<Pair<String,Boolean>>()
+        val singleCheckboxSectionCheckboxesList = arrayListOf<Pair<String,Boolean>>()
+        elementMap.iterator().forEach {
+            if(it.first.contains("option", ignoreCase = true)){
+                optionsCheckboxesList.add(it)
+            } else {
+                singleCheckboxSectionCheckboxesList.add(it)
+            }
+        }
+        return when (sectionId.toLowerCase()) {
+            "single" ->  singleCheckboxSectionCheckboxesList
+            "multiple" -> optionsCheckboxesList
+            else -> throw Exception()
+        }
+    }
+
+    fun numberOfOptionsCheckboxesSelected() : Int {
+        val checkboxElements = getCheckboxesListWithSelectionState("multiple")
+        var numberOfCheckboxesRetrieved = 0
+        checkboxElements.iterator().forEach {
+            if (it.second)
+                numberOfCheckboxesRetrieved++
+        }
+        return numberOfCheckboxesRetrieved
     }
 
     fun clickMultipleCheckboxesButton(expectedText : String) {
