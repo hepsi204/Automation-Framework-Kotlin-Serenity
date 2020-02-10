@@ -52,7 +52,6 @@ class CheckboxesDemoPageStepDefinitions {
     fun iCanSeeAllCheckboxesUnselectedInMultipleCheckboxDemoSection(){
         val numberOfCheckboxesRetrieved = checkboxesDemoPage.numberOfOptionsCheckboxesSelected()
         val expectedNumberOfCheckboxes = 0
-
         Assert.assertTrue(
             "Expected $expectedNumberOfCheckboxes checkboxes to be selected in Multiple Checkbox " +
                     "Demo section, but actual is $numberOfCheckboxesRetrieved",

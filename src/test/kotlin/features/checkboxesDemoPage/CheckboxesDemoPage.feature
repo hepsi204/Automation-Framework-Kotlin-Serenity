@@ -20,7 +20,6 @@ Feature: Test Checkboxes Demo Page
     When I click on the Check All button in Multiple Checkbox Demo section
     Then I can see all checkboxes selected in Multiple Checkbox Demo section
 
-  @run-now
   Scenario: User is able to click on the 'Uncheck All' checkbox in Multiple Checkbox Demo section
             and button text is updated to 'Check All'
     Given I am on the Check Box Demo page and all the checkboxes in Multiple Checkbox Demo section are selected
