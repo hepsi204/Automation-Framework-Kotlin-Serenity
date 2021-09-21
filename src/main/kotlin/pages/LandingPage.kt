@@ -4,6 +4,7 @@ import elements.BasePageElement
 import elements.mapElementsToLocators
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
+import java.util.*
 
 @At("https://www.seleniumeasy.com/test/")
 class LandingPage : BasePageObject() {
@@ -25,7 +26,7 @@ class LandingPage : BasePageObject() {
     }
 
     fun clickOnButton ( buttonText : String ) {
-        return when (buttonText.toLowerCase()) {
+        return when (buttonText.lowercase(Locale.getDefault())) {
             "start practising" -> startPractisingButton.element.click()
             else -> throw Exception("Button with text $buttonText not implemented for this page")
         }
@@ -40,14 +41,14 @@ class LandingPage : BasePageObject() {
     }
 
     fun checkToggleTabSectionDisplayed( sectionName : String ) : Boolean {
-        return when (sectionName.toLowerCase()) {
-           "basic" -> basicSection.element.isVisible
+        return when (sectionName.lowercase(Locale.getDefault())) {
+            "basic" -> basicSection.element.isVisible
             else -> throw Exception("$sectionName section display check is not implemented")
         }
     }
 
     private fun getToggleTabElementClassName( id : String) : String {
-        return when (id.toLowerCase()){
+        return when (id.lowercase(Locale.getDefault())) {
             "welcome" -> "${interactiveRoundToggleTabs.desktopLocator} one"
             "basic" -> "${interactiveRoundToggleTabs.desktopLocator} two"
             "intermediate" -> "${interactiveRoundToggleTabs.desktopLocator} three"

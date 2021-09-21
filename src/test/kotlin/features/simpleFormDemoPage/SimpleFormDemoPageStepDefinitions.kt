@@ -1,23 +1,24 @@
 package features.simpleFormDemoPage
 
-import cucumber.api.java.en.Then
-import cucumber.api.java.en.When
 import helpers.SessionHelper
 import helpers.SessionHelperIds
+import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import org.junit.Assert
 import pages.SimpleFormDemoPage
 import pages.TwoInputFieldId
+import java.util.*
 
 class SimpleFormDemoPageStepDefinitions {
 
     private lateinit var simpleFormDemoPage: SimpleFormDemoPage
 
     @When("^I type (.*) into the (.*) text box on Simple Form Demo page$")
-    fun iTypeIntoTheTextBoxOnSimpleFormDemoPage(  textToType : String , textBoxId : String ){
-        when (textBoxId.toLowerCase()){
+    fun iTypeIntoTheTextBoxOnSimpleFormDemoPage(textToType: String, textBoxId: String) {
+        when (textBoxId.lowercase(Locale.getDefault())) {
             "enter message" -> simpleFormDemoPage.typeIntoSingleInputField(textToType)
             "enter a" -> simpleFormDemoPage.typeIntoTwoInputField(textToType, TwoInputFieldId.ONE)
-            "enter b" -> simpleFormDemoPage.typeIntoTwoInputField(textToType,TwoInputFieldId.TWO)
+            "enter b" -> simpleFormDemoPage.typeIntoTwoInputField(textToType, TwoInputFieldId.TWO)
         }
     }
 

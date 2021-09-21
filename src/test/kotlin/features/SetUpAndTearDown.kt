@@ -1,6 +1,6 @@
 package features
 
-import cucumber.api.java.Before
+import io.cucumber.java.Before
 import net.serenitybdd.core.Serenity
 
 class SetUpAndTearDown {
