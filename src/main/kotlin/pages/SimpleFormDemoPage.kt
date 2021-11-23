@@ -5,6 +5,7 @@ import helpers.SessionHelper
 import helpers.SessionHelperIds
 import net.serenitybdd.core.pages.WebElementFacade
 import net.thucydides.core.annotations.At
+import java.util.*
 
 @At("https://www.seleniumeasy.com/test/basic-first-form-demo.html")
 class SimpleFormDemoPage : BasePageObject() {
@@ -51,7 +52,7 @@ class SimpleFormDemoPage : BasePageObject() {
     )
 
     fun clickOnButton (buttonText : String) {
-       return  when (buttonText.toLowerCase()) {
+        return when (buttonText.lowercase(Locale.getDefault())) {
             "show message" -> showMessageButton.element.click()
             "get total" -> getTotalButton.element.click()
             else -> throw Exception("Button with text $buttonText not implemented for this page")

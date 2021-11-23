@@ -1,6 +1,6 @@
 package features.checkboxesDemoPage
 
-import cucumber.api.CucumberOptions
+import io.cucumber.junit.CucumberOptions
 import net.serenitybdd.cucumber.CucumberWithSerenity
 import net.thucydides.core.annotations.Managed
 import org.junit.runner.RunWith

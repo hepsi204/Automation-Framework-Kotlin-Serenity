@@ -1,5 +1,8 @@
 package config
 
+import java.util.*
+import kotlin.collections.HashMap
+
 class PageUrlFactory {
 
     enum class PageName (val path: String) {
@@ -31,7 +34,7 @@ class PageUrlFactory {
         )
 
     fun getPageUrl(pageName: String): String {
-        val path = pathMap[pageName.toLowerCase()]
+        val path = pathMap[pageName.lowercase(Locale.getDefault())]
         return "${Config.instance.url}$path"
     }
 }

@@ -4,6 +4,8 @@ import elements.BasePageElement
 import elements.mapElementsToLocators
 import net.serenitybdd.core.annotations.findby.By
 import net.serenitybdd.core.pages.WebElementFacade
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CheckboxesPage : BasePageObject() {
 
@@ -53,7 +55,7 @@ class CheckboxesPage : BasePageObject() {
                 singleCheckboxSectionCheckboxesList.add(it)
             }
         }
-        return when (sectionId.toLowerCase()) {
+        return when (sectionId.lowercase(Locale.getDefault())) {
             "single" ->  singleCheckboxSectionCheckboxesList
             "multiple" -> optionsCheckboxesList
             else -> throw Exception()
